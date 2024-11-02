@@ -4,7 +4,7 @@ export default defineI18nConfig(() => ({
   fallbackLocale: 'en',
   messages: {
     bg: {
-      house_name: 'Грънчарова Къща',
+      house_name: 'Грънчарова Къща за Гости',
       welcome: 'Добре дошли',
       home: 'Начало',
       rooms: 'Стаи',
@@ -17,9 +17,11 @@ export default defineI18nConfig(() => ({
       availability_description: 'Моля, въведете датата за която желаете да направите резервация.',
       check_in_date: 'Дата на пристигане',
       check_out_date: 'Дата на напускане',
+      adults: 'Възрастни',
+      child: 'Деца',
     },
     en: {
-      house_name: 'Grancharova House',
+      house_name: 'Grancharova Guest House',
       welcome: 'Welcome',
       home: 'Home',
       rooms: 'Rooms',
@@ -32,6 +34,8 @@ export default defineI18nConfig(() => ({
       book: 'Book now',
       check_in_date: 'Check-in date',
       check_out_date: 'Check-out date',
+      adults: 'Adults',
+      child: 'Children',
     },
   },
 }))

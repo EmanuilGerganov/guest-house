@@ -20,7 +20,7 @@
         </address>
       </div>
       <div>
-        <span>Запишете за нашия бюлетин</span>
+        <h4>Запишете за нашия бюлетин</h4>
         <form action="">
           <input
             type="email"

@@ -33,25 +33,26 @@ const today = computed(() => {
         >
           <div
             id="hero-content"
-            class="text-white lg:text-left lg:max-w-xl"
+            class="text-white lg:text-left lg:max-w-[500px]"
           >
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+            <h1 class="text-[34px] md:text-[64px] leading-[34px] md:leading-[64px] font-bold mb-4">
               {{ $t("house_name") }}
             </h1>
-            <p class="text-lg md:text-xl mb-6">
-              {{ $t("tagline") }}
+            <p class="mb-6 text-lg">
+              <!-- {{ $t("tagline") }} -->
+              Our slopes are the perfect place to practice your skills or take on a new challenge. Plus, our charming town is the perfect place to relax after a long day on the slopes.
             </p>
           </div>
           <div
             id="hero-booking"
-            class="bg-white rounded-3xl shadow-xl p-6 md:p-8 w-full max-w-md"
+            class="bg-white rounded-3xl shadow-xl p-6 md:p-[50px] w-full max-w-md"
           >
             <h2
-              class="text-2xl font-bold tracking-wider text-gray-800 mb-4 uppercase"
+              class="text-[26px] font-bold tracking-[1px] leading-[32.5px] text-gray-800 mb-4 uppercase"
             >
               {{ $t("find_availability") }}
             </h2>
-            <p class="text-sm text-gray-600 mb-6">
+            <p class="leading-[1.9em] text-paragraph font-light mb-8">
               {{ $t("availability_description") }}
             </p>
             <form>
@@ -59,10 +60,9 @@ const today = computed(() => {
                 <div class="relative">
                   <input
                     id="check-in-date"
-
                     v-model="checkInDate"
                     type="date"
-                    class="peer w-full px-3 py-2 text-gray-700 bg-gray-100 border
+                    class="h-14 peer w-full px-3 py-2 text-gray-700  border
                      border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     :min="today"
                   >
@@ -76,12 +76,12 @@ const today = computed(() => {
                     {{ $t("check_in_date") }}
                   </label>
                 </div>
-                <div class="relative">
+                <div class="relative mb-4">
                   <input
                     id="check-out-date"
                     v-model="checkOutDate"
                     type="date"
-                    class="peer w-full px-3 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    class="h-14 peer w-full px-3 py-2 text-gray-700  border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     :min="today"
                   >
                   <label
@@ -93,42 +93,42 @@ const today = computed(() => {
                 </div>
                 <div class="flex gap-4">
                   <div class="relative flex-1">
+                    <label
+                      for="adults"
+                      class=" left-3 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500"
+                    >
+                      {{ $t("adults") }}
+                    </label>
                     <input
                       id="adults"
                       v-model="adults"
                       type="number"
                       min="1"
                       max="10"
-                      class="peer w-full px-3 py-2 text-gray-700
-                       bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      class="h-14 peer w-full px-3 py-2 text-gray-700
+                        border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
-                    <label
-                      for="adults"
-                      class="absolute left-3 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500"
-                    >
-                      {{ $t("adults") }}
-                    </label>
                   </div>
                   <div class="relative flex-1">
+                    <label
+                      for="children"
+                      class="left-3 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500"
+                    >
+                      {{ $t("child") }}
+                    </label>
                     <input
                       id="children"
                       v-model="children"
                       type="number"
                       min="0"
                       max="10"
-                      class="peer w-full px-3 py-2 text-gray-700
-                       bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      class="h-14 peer w-full px-3 py-2 text-gray-700
+                        border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
-                    <label
-                      for="children"
-                      class="absolute left-3 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500"
-                    >
-                      {{ $t("children") }}
-                    </label>
                   </div>
                 </div>
               </div>
-              <Button class="w-full mt-6">
+              <Button class="w-full mt-6 py-2.5">
                 {{ $t("find_availability") }}
               </Button>
             </form>
