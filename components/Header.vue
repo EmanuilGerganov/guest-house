@@ -5,7 +5,13 @@ import Button from './Button.vue'
 
 const isMenuOpen = ref(false)
 const scrolled = ref(false)
-const menuItems = ['Начало', 'Настаняване', 'Галерия', 'Услуги', 'Контакти']
+const menuItems = [
+  { key: 'home', href: '#home' },
+  { key: 'accommodation', href: '#accommodation' },
+  { key: 'gallery', href: '#gallery' },
+  { key: 'services', href: '#services' },
+  { key: 'contacts', href: '#contacts' },
+]
 const { locale } = useI18n()
 
 const currentLanguage = computed(() => locale.value)
@@ -71,19 +77,20 @@ onUnmounted(() => {
       <!-- Desktop menu -->
       <div
         id="menu"
-        class="hidden md:block md:order-2"
+        class="hidden lg:block md:order-2"
       >
         <ul class="flex gap-4 text-lg font-semibold">
           <li
             v-for="item in menuItems"
-            :key="item"
+            :key="item.key"
           >
             <a
-              :href="`#${item.toLowerCase()}`"
-              class="hover:text-green-500 transition-colors" :class="[
-                scrolled ? 'text-gray-800' : 'text-white',
-              ]"
-            >{{ item }}</a>
+              :href="item.href"
+              class="hover:text-secondary transition-colors"
+              :class="[scrolled ? 'text-gray-800' : 'text-white']"
+            >
+              {{ $t(`menu.${item.key}`) }}
+            </a>
           </li>
         </ul>
       </div>
@@ -115,14 +122,14 @@ onUnmounted(() => {
         :class="[
           isMenuOpen ? 'translate-x-0' : '-translate-x-full',
         ]"
-        class="w-64 bg-green-800 text-white p-6 md:hidden fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out z-30"
+        class="w-full bg-white text-gray-800 p-6 md:hidden fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out z-30"
       >
         <div class="flex justify-between items-center mb-8">
-          <h2 class="text-2xl font-bold">
-            Menu
+          <h2 class="text-2xl font-bold uppercase">
+            Grancharova
           </h2>
           <button
-            class="text-white"
+            class="text-gray-800"
             @click="isMenuOpen = false"
           >
             <svg
@@ -144,14 +151,24 @@ onUnmounted(() => {
         <ul class="space-y-4">
           <li
             v-for="item in menuItems"
-            :key="item"
+            :key="item.key"
           >
             <a
-              :href="`#${item.toLowerCase()}`"
-              class="block py-2 hover:bg-green-700 transition-colors rounded px-2"
-            >{{ item }}</a>
+              :href="item.href"
+              class="block py-2 hover:text-secondary transition-colors rounded px-2 text-lg font-semibold"
+              @click="isMenuOpen = false"
+            >
+              {{ $t(`menu.${item.key}`) }}
+            </a>
           </li>
         </ul>
+        <div class="mt-8">
+          <button
+            class="w-full font-bold px-[35px] py-[15px] rounded-4xl bg-black text-white"
+          >
+            {{ $t("book") }}
+          </button>
+        </div>
       </div>
       <!-- Overlay -->
       <div
@@ -163,9 +180,13 @@ onUnmounted(() => {
         id="book-now"
         class="hidden md:block md:order-4"
       >
-        <Button>
+        <button
+          class="font-bold  px-[35px] py-[15px]  rounded-4xl"
+          :class="[scrolled ? 'bg-black' : 'bg-white',
+                   scrolled ? 'text-white' : 'text-black']"
+        >
           {{ $t("book") }}
-        </Button>
+        </button>
       </div>
     </div>
   </header>

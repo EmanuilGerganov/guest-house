@@ -1,5 +1,9 @@
 <script setup>
+import breakfastImage from '@/assets/breakfast.jpg'
+import dinnerImage from '@/assets/dinner.jpg'
 import { computed, ref } from 'vue'
+import MealCard from '~/components/MealCard.vue'
+import ServiceCard from '~/components/ServiceCard.vue'
 
 const checkInDate = ref('')
 const checkOutDate = ref('')
@@ -10,6 +14,39 @@ const today = computed(() => {
   const date = new Date()
   return date.toISOString().split('T')[0]
 })
+
+const services = [
+  {
+    icon: 'M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z',
+    title: 'location',
+    description: 'location_description',
+  },
+  {
+    icon: 'M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6l0 29.1L364.3 320l29.1 0c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192z',
+    title: 'clean',
+    description: 'cleaning_description',
+  },
+  {
+    icon: 'M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40l40 0c13.3 0 24-10.7 24-24l0-40l40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3z',
+    title: 'check_in',
+    description: 'check_in_description',
+  },
+]
+
+const meals = [
+  {
+    title: 'breakfast',
+    description: 'breakfast_description',
+    time: 'breakfast_time',
+    image: breakfastImage,
+  },
+  {
+    title: 'dinner',
+    description: 'dinner_description',
+    time: 'dinner_time',
+    image: dinnerImage,
+  },
+]
 </script>
 
 <template>
@@ -20,7 +57,7 @@ const today = computed(() => {
     >
       <section
         id="hero"
-        class="relative min-h-screen flex items-center justify-center overflow-hidden"
+        class="relative min-h-screen py-24 md:py-24 flex items-center justify-center overflow-hidden"
       >
         <img
           src="assets/hero.jpg"
@@ -128,9 +165,12 @@ const today = computed(() => {
                   </div>
                 </div>
               </div>
-              <Button class="w-full mt-6 py-2.5">
+              <button class="bg-secondary w-full uppercase text-white py-4 font-bold mt-6 rounded-full">
                 {{ $t("find_availability") }}
-              </Button>
+              </button>
+              <!-- <Button class="w-full mt-6 py-2.5">
+                {{ $t("find_availability") }}
+              </Button> -->
             </form>
           </div>
         </div>
@@ -166,7 +206,7 @@ const today = computed(() => {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-8">
           <div class="flex items-center">
             <h2 class="text-4xl font-bold">
-              OUR <span class="text-secondary">GALLERY</span>
+              {{ $t('our_gallery_1') }} <span class="text-secondary">{{ $t('our_gallery_2') }}</span>
             </h2>
           </div>
           <div class="flex items-center">
@@ -201,13 +241,13 @@ const today = computed(() => {
             <div>
               <div class="flex gap-4 mb-5 border-b border-gray-200 pb-5 border-solid">
                 <div class="fill-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 512 512">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="50" viewBox="0 0 512 512">
                     <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
                   </svg>
                 </div>
                 <div>
                   <h3 class="font-bold mb-2.5">
-                    Location
+                    {{ $t("location") }}
                   </h3>
                   <p class="text-paragraph text-sm font-light mb-4 leading-[2em]">
                     This place is located in the heart of the slopes. This will give you easier access to the slopes and make it easier to get lessons.
@@ -216,13 +256,13 @@ const today = computed(() => {
               </div>
               <div class="flex gap-4 mb-5 border-b border-gray-200 pb-5 border-solid">
                 <div class="fill-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="45" viewBox="0 0 576 512">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="50" viewBox="0 0 576 512">
                     <path d="M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6l0 29.1L364.3 320l29.1 0c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z" />
                   </svg>
                 </div>
                 <div>
                   <h3 class="font-bold mb-2.5">
-                    Enhanced Clean
+                    {{ $t('clean') }}
                   </h3>
                   <p class="text-paragraph text-sm font-light mb-4 leading-[2em]">
                     We work hard to ensure that your ski resort or vacation home is clean and ready for your next visit.
@@ -231,13 +271,13 @@ const today = computed(() => {
               </div>
               <div class="flex gap-4 mb-5">
                 <div class="fill-secondary">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 512 512">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="36" width="50" viewBox="0 0 512 512">
                     <path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17l0 80c0 13.3 10.7 24 24 24l80 0c13.3 0 24-10.7 24-24l0-40 40 0c13.3 0 24-10.7 24-24l0-40 40 0c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z" />
                   </svg>
                 </div>
                 <div>
                   <h3 class="font-bold mb-2.5">
-                    Self check-in
+                    {{ $t('check_in') }}
                   </h3>
                   <p class="text-paragraph text-sm font-light mb-4 leading-[2em]">
                     This ski vacation self check in is perfect for those who love to ski! With all of the necessary supplies at your fingertips, you'll be able to hit the slopes as soon as you arrive!
@@ -266,18 +306,49 @@ const today = computed(() => {
       </section>
       <section id="vacation-services">
         <div class="max-w-6xl mx-auto px-6 lg:px-8 py-16">
-          <h2 class="text-4xl font-bold mb-4 uppercase">
-            Vacation <span class="text-secondary">services</span>
+          <h2 class="text-4xl font-bold mb-12 uppercase">
+            {{ $t('vacation_services') }}
           </h2>
-          <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
-            <div class="aspect-square bg-gray-200" />
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ServiceCard
+              v-for="service in services"
+              :key="service.title"
+              :icon="service.icon"
+              :title="service.title"
+              :description="service.description"
+            />
+          </div>
+        </div>
+      </section>
+      <section id="vacation-services-2 bg-grayBg">
+        <div class="bg-grayBg">
+          <div class="max-w-6xl mx-auto px-6 lg:px-8 py-16">
+            <h2 class="text-4xl font-bold mb-4 uppercase">
+              Vacation <span class="text-secondary">services</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <ServiceCard
+                v-for="service in services"
+                :key="service.title"
+                :icon="service.icon"
+                :title="service.title"
+                :description="service.description"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="meals" class="bg-grayBg py-24">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-4xl font-bold mb-4">
+            {{ $t('meals') }}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <MealCard
+              v-for="meal in meals"
+              :key="meal.title"
+              v-bind="meal"
+            />
           </div>
         </div>
       </section>

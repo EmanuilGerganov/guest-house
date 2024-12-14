@@ -14,6 +14,7 @@ export default {
         secondary: '#4A86CC',
         paragraph: '#1A222C',
         heading: '#394553',
+        grayBg: '#F5F8FA',
       },
     },
   },
